@@ -1,0 +1,19 @@
+{% extends base.html %}
+<!DOCTYPE html>
+
+
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages Filtered</title>
+</head>
+<body>
+
+{% for msg in filter_messages %}
+{% print msg %}
+{% endfor %}
+
+</body>
+</html>

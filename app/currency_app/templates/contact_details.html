@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+    {% include 'includes/login_div.html' %}
+    <div>
+        <div style="width: 50rem; margin-left: 20px; margin-top: 5px">
+            <form action="{% url 'contact_us_form'  %}" method="post">
+                {% csrf_token %}
+                {{ contact_us_form.email_from }}
+                {{ contact_us_form.subject }}
+                {{ contact_us_form.message }}
+
+            <button type="submit" class="btn btn-warning">Submit</button>
+            </form>
+        </div>
+
+    </div>
+
+ <table>
+    <tr>
+        <th>Email From</th>
+        <th>Subject</th>
+        <th>Message</th>
+
+    </tr>
+    {% for msg in msgs_filtered %}
+    <tr>
+        <td>{{ msg.email_from }}</td>
+        <td>{{ msg.subject }}</td>
+        <td>{{ msg.message }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

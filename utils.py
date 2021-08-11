@@ -8,7 +8,8 @@ import json
 ###----DB-------
 
 
-
+def alternative_function()
+    return str('This is an alternative version of my project - branch alt-code')
 
 
 def return_request():
