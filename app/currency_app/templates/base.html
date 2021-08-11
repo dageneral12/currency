@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+         {% block title %}
+             {{ page_title|default:"Untitled Page" }}
+         {% endblock title %}
+    </title>
+
+</head>
+<body>
+       {% block content %}
+     <p> content placeholder</p>
+       {% endblock content %}
+    {% block footer %}
+
+        {% include 'includes/footer.html' %}
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+<div style="width: 50rem; margin-left: 20px; margin-top: 5px">
+<form action="{% url 'contact_us_form'  %}" method="post">
+    {% csrf_token %}
+     {{ contact_us_form.as_p}}
+
+    <button type="submit" class="btn btn-warning">Submit</button>
+</form>
+</div>
+
+</div>
+
+{% endblock %}
+
