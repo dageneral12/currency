@@ -1,4 +1,5 @@
-from .models import Rate, ContactUs
+from .models import Rate, ContactUs, Source
+
 
 from django.views.generic import CreateView
 from django.shortcuts import render, redirect
@@ -35,6 +36,13 @@ def contact_us_form(request):
 
         else:
             return render()
+
+
+def show_sources(request):
+    sources = Source.objects.all()
+    return render(request,
+                  'show_sources.html',
+                  {'sources': sources})
 
 
 class Create_View(CreateView):

@@ -2,7 +2,8 @@ from django.urls import path
 from .views import (hello_world,
                     filter_contact_us_msg,
                     rate_list,
-                    contact_us_form)
+                    contact_us_form,
+                    show_sources)
 
 
 urlpatterns = [
@@ -10,4 +11,5 @@ urlpatterns = [
     path('show_msgs/', filter_contact_us_msg, name='filter_messages'),
     path('rate_list/', rate_list, name='rate_list'),
     path('contact_us_form', contact_us_form, name='contact_us_form'),
+    path('show_sources/', show_sources, name='show_sources')
 ]
