@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+ <table>
+    <tr>
+        <th>Source Name</th>
+        <th>Source URL</th>
+
+    </tr>
+    {% for source in sources %}
+    <tr>
+        <td>{{ source.name }}</td>
+        <td>{{ source.source_url }}</td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
