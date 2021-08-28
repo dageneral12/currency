@@ -1,0 +1,7 @@
+__pycache__
+/app/currency_app/management/
+/scraper
+.DS_Store
+.idea/
+venv
+hillel_hwk_nikita

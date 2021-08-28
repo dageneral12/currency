@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Rate Detail
+
+{% endblock %}
+
+{% block content %}
+ID:              {{ rate.id }}<br>
+Currency:        {{ rate.currency }}<br>
+Source:          {{ rate.source.name }}<br>
+Sale:            {{ rate.sale }}<br>
+Buy:             {{ rate.buy }}<br>
+
+
+{% endblock %}

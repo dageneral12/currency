@@ -1,11 +1,28 @@
 from django import forms
+from .models import ContactUs, Rate, Source
 
-from .models import ContactUs
+
+class SourceForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Source
+        fields = ('name', 'source_url')
 
 
-class ContactForm(forms.ModelForm):
+class RateForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Rate
+
+
+        fields = ('sale', 'buy', 'source', 'currency')
+
+
+class ContactUsForm(forms.ModelForm):
 
     class Meta:
 
         model = ContactUs
-        fields = ['email_from', 'subject', 'message']
+        fields = ('email_from', 'subject', 'message')

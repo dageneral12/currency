@@ -1,9 +1,9 @@
 from .models import Rate, ContactUs, Source
 
 
-from django.views.generic import CreateView
-from django.shortcuts import render, redirect
-from .forms import ContactForm
+from django.views.generic import CreateView, UpdateView, FormView, DeleteView, DetailView, ListView
+from django.shortcuts import render, redirect, get_object_or_404
+from currency_app.forms import SourceForm, RateForm, ContactUsForm
 
 
 # Create your views here.
@@ -28,14 +28,15 @@ def filter_contact_us_msg(request):
 
 
 def contact_us_form(request):
+
     if request.method == 'POST':
-        contact_request = ContactForm(request.POST)
+        contact_request = ContactUsForm(request.POST)
         if contact_request.is_valid():
             contact_request.save()
             return redirect('filter_messages')
 
         else:
-            return render()
+            return redirect('filter_messages')
 
 
 def show_sources(request):
@@ -45,6 +46,90 @@ def show_sources(request):
                   {'sources': sources})
 
 
-class Create_View(CreateView):
+def rate_create(request):
+    if request.method == 'POST':
+        create_form = RateForm(request.POST)
+        if create_form.is_valid():
+            create_form.save()
+            return redirect('rate_list')
+    elif request.method == 'GET':
+        create_form = RateForm()
 
-    model = Rate
+
+    return render(request, 'rate_create.html', {'create_form': create_form})
+
+
+
+def rate_delete(request, rate_id):
+    rate = get_object_or_404(Rate, id=rate_id)
+    rate_form = RateForm(instance=rate)
+
+    if request.method == 'POST':
+        rate_form = RateForm(request.POST, instance=rate)
+
+        rate.delete()
+        return redirect('rate_list')
+    return render(request, 'rate_delete.html', {'rate_form': rate_form})
+
+
+def rate_details(request, rate_id):
+    rate = get_object_or_404(Rate, id=rate_id)
+    return render(request, 'rate_detail.html', {'rate': rate})
+
+def rate_update(request, rate_id):
+    rate = get_object_or_404(Rate, id=rate_id)
+    if request.method == 'POST':
+        rate_form = RateForm(request.POST, instance=rate)
+        if rate_form.is_valid():
+            rate_form.save()
+            return redirect('rate_list')
+    elif request.method == 'GET':
+        rate_form = RateForm(instance=rate)
+
+    return render(request, 'rate_update.html', {'rate_form': rate_form})
+
+
+def rate_details(request, rate_id):
+    rate = get_object_or_404(Rate, id=rate_id)
+    return render(request, 'rate_detail.html', {'rate': rate})
+
+class SourceListView(ListView):
+    model = Source
+    template_name = 'show_sources.html'
+
+
+class SourceCreateView(CreateView):
+    model = Source
+    queryset = Source.objects.all()
+    form_class = SourceForm
+    template_name = 'source_create.html'
+    success_url = 'source_list/'
+
+    # register the class in the urls.py  =- RateCreateView.as_view()
+
+
+class SourceDetailView(DetailView):
+    queryset = Source.objects.all()
+    template_name = 'source_details.html'
+    context_object_name = 'detail_view'
+
+
+
+class SourceUpdateView(UpdateView):
+    queryset = Rate.objects.all()
+    form_class = SourceForm
+    template_name = 'source_update.html'
+    success_url = 'source_list/'
+    context_object_name = 'update_view'
+
+
+
+class SourceDeleteView(DeleteView):
+    queryset = Source.objects.all()
+    template_name = 'source_delete.html'
+    success_url = 'source_list/'
+    context_object_name = 'delete_view'
+    form_class = SourceForm()
+
+
+
