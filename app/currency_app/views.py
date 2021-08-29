@@ -1,7 +1,13 @@
+from django.urls import reverse_lazy
+
 from .models import Rate, ContactUs, Source
 
 
-from django.views.generic import CreateView, UpdateView, FormView, DeleteView, DetailView, ListView
+from django.views.generic import (CreateView,
+                                  UpdateView,
+                                  DeleteView,
+                                  DetailView,
+                                  ListView)
 from django.shortcuts import render, redirect, get_object_or_404
 from currency_app.forms import SourceForm, RateForm, ContactUsForm
 
@@ -55,12 +61,11 @@ def rate_create(request):
     elif request.method == 'GET':
         create_form = RateForm()
 
-
     return render(request, 'rate_create.html', {'create_form': create_form})
 
 
-
 def rate_delete(request, rate_id):
+
     rate = get_object_or_404(Rate, id=rate_id)
     rate_form = RateForm(instance=rate)
 
@@ -76,6 +81,7 @@ def rate_details(request, rate_id):
     rate = get_object_or_404(Rate, id=rate_id)
     return render(request, 'rate_detail.html', {'rate': rate})
 
+
 def rate_update(request, rate_id):
     rate = get_object_or_404(Rate, id=rate_id)
     if request.method == 'POST':
@@ -89,47 +95,42 @@ def rate_update(request, rate_id):
     return render(request, 'rate_update.html', {'rate_form': rate_form})
 
 
-def rate_details(request, rate_id):
-    rate = get_object_or_404(Rate, id=rate_id)
-    return render(request, 'rate_detail.html', {'rate': rate})
+# Homework 8 & 9 - Class based views, Source, reverse
+
 
 class SourceListView(ListView):
+
     model = Source
     template_name = 'show_sources.html'
 
 
 class SourceCreateView(CreateView):
     model = Source
-    queryset = Source.objects.all()
-    form_class = SourceForm
     template_name = 'source_create.html'
-    success_url = 'source_list/'
-
-    # register the class in the urls.py  =- RateCreateView.as_view()
+    form_class = SourceForm
+    success_url = reverse_lazy('source_list')
 
 
 class SourceDetailView(DetailView):
+
     queryset = Source.objects.all()
     template_name = 'source_details.html'
     context_object_name = 'detail_view'
 
 
+class SourceDeleteView(DeleteView):
+
+    queryset = Source.objects.all()
+    form_class = SourceForm
+    template_name = 'source_delete.html'
+    success_url = reverse_lazy('source_list')
+    context_object_name = 'del_view'
+
 
 class SourceUpdateView(UpdateView):
-    queryset = Rate.objects.all()
+
+    queryset = Source.objects.all()
     form_class = SourceForm
     template_name = 'source_update.html'
-    success_url = 'source_list/'
+    success_url = reverse_lazy('source_list')
     context_object_name = 'update_view'
-
-
-
-class SourceDeleteView(DeleteView):
-    queryset = Source.objects.all()
-    template_name = 'source_delete.html'
-    success_url = 'source_list/'
-    context_object_name = 'delete_view'
-    form_class = SourceForm()
-
-
-

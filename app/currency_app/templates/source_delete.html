@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 
-    {% block title %}
+{% block title %}
 
-    Are you sure you'd like to delete rate Id {{ rate_form.id }}?
+Delete Source
 
-
-    {% endblock %}
+{% endblock %}
 
 {% block content %}
 
+    Delete Source? <br>
+
+
+    {{ del_view }}<br>
     <form method="post">
-    {% csrf_token %}
-
-        {{ rate_form.as_p }}
-
-        <button type="submit">Delete</button>
+        {% csrf_token %}
+        <button type="submit">Submit</button>
     </form>
 
 {% endblock %}

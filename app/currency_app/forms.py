@@ -9,14 +9,26 @@ class SourceForm(forms.ModelForm):
         model = Source
         fields = ('name', 'source_url')
 
+    def get_data(self):
+        return Source.objects.all()
+
+    def clean(self):
+        cleaned_data = super(SourceForm, self).clean()
+        all_sources = self.get_data()
+        name_cleaned = cleaned_data['name']
+        source_url_cleaned = cleaned_data['source_url']
+
+        if all_sources.filter(name=name_cleaned):
+            self.add_error(None, ValueError('Name already exists!'))
+        elif all_sources.filter(source_url=source_url_cleaned):
+            self.add_error(None, ValueError('Url already exists!'))
+
 
 class RateForm(forms.ModelForm):
 
     class Meta:
 
         model = Rate
-
-
         fields = ('sale', 'buy', 'source', 'currency')
 
 

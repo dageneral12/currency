@@ -28,3 +28,4 @@ class ContactUs(models.Model):
     subject = models.CharField(max_length=50)
     message = models.TextField(max_length=500)
 
+

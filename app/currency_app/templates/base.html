@@ -10,6 +10,12 @@
 
 </head>
 <body>
+
+{% block nav_bar %}
+
+    {% include 'includes/navbar.html' %}
+
+{% endblock %}
        {% block content %}
      <p> content placeholder</p>
        {% endblock content %}

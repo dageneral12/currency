@@ -7,10 +7,14 @@ Create Source
 {% endblock %}
 
 {% block content %}
+
+    <h1> Create Source </h1>
+    <br>
+
     <form method="post">
         {% csrf_token %}
 
-        {{ create_form.as_p }}
+        {{ form.as_p }}
         <button type = 'Submit'>Submit</button>
 
     </form>
