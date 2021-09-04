@@ -1,3 +1,4 @@
+
 from django.contrib import admin
 from .models import Rate, ContactUs, Source
 # from rangefilter.filters import DateRangeFilter
@@ -113,3 +114,6 @@ admin.site.register(Rate, RateAdmin)
 admin.site.register(Source, SourceAdmin)
 
 admin.site.register(ContactUs, ContactUsAdmin)
+
+
+
