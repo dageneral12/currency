@@ -13,14 +13,14 @@ class SourceForm(forms.ModelForm):
         return Source.objects.all()
 
     def clean(self):
-        cleaned_data = super(SourceForm, self).clean()
+        cleaned_data = super().clean()
         all_sources = self.get_data()
         name_cleaned = cleaned_data['name']
-        source_url_cleaned = cleaned_data['source_url']
+        # source_url_cleaned = cleaned_data['source_url']
 
-        if all_sources.filter(name=name_cleaned):
+        if all_sources.filter(name=name_cleaned).exists():
             self.add_error(None, ValueError('Name already exists!'))
-        elif all_sources.filter(source_url=source_url_cleaned):
+        elif all_sources.filter(name=name_cleaned).exists():
             self.add_error(None, ValueError('Url already exists!'))
 
 

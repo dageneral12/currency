@@ -2,6 +2,9 @@ from django.urls import reverse_lazy
 
 from .models import Rate, ContactUs, Source
 
+from django.core.mail import send_mail
+
+from django.conf import settings
 
 from django.views.generic import (CreateView,
                                   UpdateView,
@@ -134,3 +137,32 @@ class SourceUpdateView(UpdateView):
     template_name = 'source_update.html'
     success_url = reverse_lazy('source_list')
     context_object_name = 'update_view'
+
+
+class ContactUsCreateView(CreateView):
+
+    model = ContactUs
+    success_url = reverse_lazy('filter_messages')
+    template_name = 'contact_us_form.html'
+# form = ContactUsForm - no need to mention the form,
+# can copy fields from the model only (see below:)
+    fields = (
+        'email_from',
+        'subject',
+        'message',
+        )
+
+    def form_valid(self, form):
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        email_from = form.cleaned_data['email_from']
+        full_email_body = f'''Email from: {email_from} /n
+        Body: {message}'''
+        send_mail(
+            subject,
+            full_email_body,
+            settings.EMAIL_HOST_USER,  # your from address
+            ['dageneral@gmail.com'],  # list of to addresses
+            fail_silently=False,
+            )
+        return super().form_valid(form)

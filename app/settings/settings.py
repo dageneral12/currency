@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'currency_app',
     'django_extensions',
     'debug_toolbar',
+    'rangefilter',
+    'import_export',
 
     ]
 
@@ -130,3 +132,18 @@ INTERNAL_IPS = [
 
     '127.0.0.1',
 ]
+
+def get_pw():
+    pw_dir = r'/Users/apple/Documents/C_project/pw_file.txt'
+    with open(pw_dir, 'r') as f:
+        pw = f.readline().rstrip()
+    return pw
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_FILE_PATH = '/emails_sent/tmp/app_messages'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'tihhomirov.na@gmail.com'
+EMAIL_HOST_PASSWORD = get_pw()

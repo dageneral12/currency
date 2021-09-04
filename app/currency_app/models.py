@@ -26,4 +26,5 @@ class ContactUs(models.Model):
     id = models.IntegerField(primary_key=True) # noqa
     email_from = models.CharField(max_length=24)
     subject = models.CharField(max_length=50)
-    message = models.TextField(max_length=500)
+    message = models.CharField(max_length=500)
+    created = models.DateTimeField(auto_now_add=True)
