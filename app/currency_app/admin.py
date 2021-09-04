@@ -114,6 +114,3 @@ admin.site.register(Rate, RateAdmin)
 admin.site.register(Source, SourceAdmin)
 
 admin.site.register(ContactUs, ContactUsAdmin)
-
-
-
