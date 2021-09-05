@@ -7,6 +7,9 @@ class Source(models.Model):
     name = models.CharField(max_length=64, unique=True)
     source_url = models.CharField(max_length=255, default="")
 
+    def __str__(self):
+        return self.name
+
 
 class Rate(models.Model):
 
@@ -23,5 +26,5 @@ class ContactUs(models.Model):
     id = models.IntegerField(primary_key=True) # noqa
     email_from = models.CharField(max_length=24)
     subject = models.CharField(max_length=50)
-    message = models.TextField(max_length=500)
-
+    message = models.CharField(max_length=500)
+    created = models.DateTimeField(auto_now_add=True)

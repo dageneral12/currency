@@ -7,12 +7,22 @@
     <tr>
         <th>Source Name</th>
         <th>Source URL</th>
+        <th>Create Source</th>
+        <th>Update Source</th>
+        <th>Source Detail</th>
+        <th>Delete Source</th>
+
 
     </tr>
-    {% for source in sources %}
+    {% for source in source_list %}
     <tr>
         <td>{{ source.name }}</td>
         <td>{{ source.source_url }}</td>
+        <td><a href='{% url 'source_create' %}'>Create Source</a> </td>
+        <td><a href='{% url 'source_update' pk=source.pk %}'>Update Source</a> </td>
+        <td><a href='{% url 'source_details' pk=source.pk %}'>Source Detail</a> </td>
+        <td><a href='{% url 'source_delete' pk=source.pk %}'>Delete Source</a> </td>
+
 
     </tr>
     {% endfor %}

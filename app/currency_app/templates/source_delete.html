@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Delete Source
+
+{% endblock %}
+
+{% block content %}
+
+    Delete Source? <br>
+
+
+    {{ del_view }}<br>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Submit</button>
+    </form>
+
+{% endblock %}

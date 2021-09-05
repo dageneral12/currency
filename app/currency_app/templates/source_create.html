@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Create Source
+
+{% endblock %}
+
+{% block content %}
+
+    <h1> Create Source </h1>
+    <br>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <button type = 'Submit'>Submit</button>
+
+    </form>
+
+
+
+{% endblock %}
