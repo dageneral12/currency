@@ -32,8 +32,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contactus',
             name='created',
+
             field=models.DateTimeField(auto_now_add=True,
                                        default=django.utils.timezone.now),
+
+            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now), # noqa
             preserve_default=False,
         ),
         migrations.AlterField(

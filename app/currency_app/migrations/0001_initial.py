@@ -31,6 +31,12 @@ class Migration(migrations.Migration):
                                              max_digits=5)),
                 ('buy', models.DecimalField(decimal_places=2,
                                             max_digits=5)),
+                ('id', models.BigAutoField(auto_created=True, # noqa
+                                           primary_key=True, # noqa
+                                           serialize=False, # noqa
+                                           verbose_name='ID')),
+                ('sale', models.DecimalField(decimal_places=2, max_digits=5)),
+                ('buy', models.DecimalField(decimal_places=2, max_digits=5)),
                 ('source', models.CharField(max_length=32)),
                 ('currency', models.CharField(max_length=3)),
             ],
