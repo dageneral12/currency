@@ -19,12 +19,25 @@ from currency_app.forms import SourceForm, RateForm, ContactUsForm
 from django.http import HttpResponse
 
 
+class ResponseTimeMixin:
+
+    def rate_dispatch(self, request, *args, **kwargs):
+        import time
+        start_time = time.time()
+        print('RATE LIST DISPATCH') # noqa
+        response = super().dispatch(request, *args, **kwargs)
+        end_time = time.time()
+        time_taken = start_time - end_time
+        print(f'Response time: {time_taken} seconds') # noqa
+        return response
+
+
 def hello_world(request):
     return HttpResponse('Hello World!')
 
 
 def rate_list(request):
-    rates = Rate.objects.all()
+    rates = Rate.objects.all().order_by('-created')
     return render(request, 'rate_page.html', {'rates': rates, })
 
 
@@ -166,3 +179,13 @@ class ContactUsCreateView(CreateView):
             fail_silently=False,
             )
         return super().form_valid(form)
+
+# When you add the mixin, you don't need to explicitly
+# call the method from that class
+
+# the method will be executed automatically
+# i.e. no need for: response_time = ResponseTimeMixin.super().rate_dispatch()
+
+# class RateListView(ListView):
+    # queryset = Rate.objects.all()
+    # template_name = 'rate_detail.html'

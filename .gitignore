@@ -1,6 +1,7 @@
 __pycache__
 /app/currency_app/management/
 /app/currency_app/scraper/
+/app/currency_app/migrations/
 /scraper
 .DS_Store
 .idea/
