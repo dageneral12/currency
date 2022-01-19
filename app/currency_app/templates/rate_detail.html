@@ -8,7 +8,7 @@ Rate Detail
 
 {% block content %}
 ID:              {{ rate.id }}<br>
-Currency:        {{ rate.currency }}<br>
+Currency:        {{ rate.get_currency_display }}<br>
 Source:          {{ rate.source.name }}<br>
 Sale:            {{ rate.sale }}<br>
 Buy:             {{ rate.buy }}<br>

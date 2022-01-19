@@ -36,4 +36,5 @@ urlpatterns = [
          SourceDetailView.as_view(), name='source_details'),
     path('contact_us_form/', ContactUsCreateView.as_view(),
          name='contact_us_form')
+
 ]

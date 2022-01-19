@@ -14,9 +14,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Source',
             fields=[
-                ('id', models.IntegerField(primary_key=True, serialize=False)),
-                ('name', models.CharField(max_length=64, unique=True)),
-                ('source_url', models.CharField(default='', max_length=255)),
+                ('id', models.IntegerField(primary_key=True,
+                                           serialize=False)),
+                ('name', models.CharField(max_length=64,
+                                          unique=True)),
+                ('source_url', models.CharField(default='',
+                                                max_length=255)),
             ],
             options={
                 'managed': False,
@@ -29,6 +32,10 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='contactus',
             name='created',
+
+            field=models.DateTimeField(auto_now_add=True,
+                                       default=django.utils.timezone.now),
+
             field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now), # noqa
             preserve_default=False,
         ),

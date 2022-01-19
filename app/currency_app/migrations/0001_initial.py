@@ -23,6 +23,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Rate',
             fields=[
+                ('id', models.BigAutoField(auto_created=True,
+                                           primary_key=True,
+                                           serialize=False,
+                                           verbose_name='ID')),
+                ('sale', models.DecimalField(decimal_places=2,
+                                             max_digits=5)),
+                ('buy', models.DecimalField(decimal_places=2,
+                                            max_digits=5)),
                 ('id', models.BigAutoField(auto_created=True, # noqa
                                            primary_key=True, # noqa
                                            serialize=False, # noqa
